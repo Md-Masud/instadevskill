@@ -14,10 +14,10 @@ class CreateReactablesTable extends Migration
     public function up()
     {
         Schema::create('reactables', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('reaction_id')
-                ->constrained()
-                ->onDelete('cascade');
+                ->constrained('reactions')
+                ->onUpdate('cascade')
+                ->cascadeOnDelete();
             $table->morphs('reactable');
             $table->timestamps();
         });
